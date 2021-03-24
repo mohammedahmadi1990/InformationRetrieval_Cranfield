@@ -37,11 +37,15 @@ public class DocumentParser
                 tf = new TfIdf().tfCalculator(docTermsArray, terms);
                 idf = new TfIdf().idfCalculator(termsDocsArray, terms);
                 tfidf = tf * idf;
+                if (Double.isNaN(tfidf)){
+                    tfidf=0;
+                }
                 tfidfvectors[count] = tfidf;
                 count++;
             }
             tfidfDocsVector.add(tfidfvectors);  //storing document vectors;
         }
+
     }
 
     // Method to calculate cosine similarity between all the documents.
@@ -53,8 +57,8 @@ public class DocumentParser
             for (int j = 0; j < tfidfDocsVector.size(); j++)
             {
                 if(i!=j) {
-                    System.out.println("queryId_" + (queryId+1) + "  documentId_" + (i+1) + " CosineSimilarity: "+ new CosineSimilarity().cosineSimilarity(tfidfDocsVector.get(i),tfidfDocsVector.get(j)));
-                    //System.out.println("between " + i + " and " + j + "CosineSimilarity: "+ new CosineSimilarity().cosineSimilarity (tfidfDocsVector.get(i),  tfidfDocsVector.get(j)));
+                    System.out.println("queryId_" + queryId + "  documentId_" + i + " CosineSimilarity: "+ new CosineSimilarity().cosineSimilarity(tfidfDocsVector.get(i),tfidfDocsVector.get(j)));
+                    //System.out.println("between " + i + " and " + j + " CosineSimilarity: "+ new CosineSimilarity().cosineSimilarity (tfidfDocsVector.get(i),  tfidfDocsVector.get(j)));
                 }
             }
         }

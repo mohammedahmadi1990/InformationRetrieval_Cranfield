@@ -1,5 +1,7 @@
 package com.retrieve;
 
+import static java.lang.Double.NaN;
+
 public class CosineSimilarity
 {
 
